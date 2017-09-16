@@ -1,0 +1,10 @@
+automation:
+  - alias: Test Ping 
+    trigger:
+      platform: event
+      event_type: MY_CUSTOM_EVENT
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.who_cooks
+          option: Paulus
