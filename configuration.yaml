@@ -60,17 +60,25 @@ group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 
-camera:
-  - platform: demo
-
-
-input_select:
-  status:
-    name: Status level
-# A collection is used for options
-    options:
-     - 0
-     - 1
-     - 2
-     - 3
-    initial: 0
+# input_select:
+#   status:
+#     name: Status level
+# # A collection is used for options
+#     options:
+#      - 0
+#      - 1
+#      - 2
+#      - 3
+#     initial: 0
+#
+#
+# telegram_bot:
+#   - platform: polling
+#     api_key: !secrets Telegram_API_key
+#     allowed_chat_ids:
+#       - !secrets Telegram_allowed_chat_id
+#
+# notify:
+#   - name: NOTIFIER_NAME
+#     platform: telegram
+#     chat_id: !secrets Telegram_allowed_chat_id

@@ -1,10 +1,14 @@
-automation:
-  - alias: Test Ping 
-    trigger:
-      platform: event
-      event_type: MY_CUSTOM_EVENT
-    action:
-      - service: input_select.select_option
-        data:
-          entity_id: input_select.who_cooks
-          option: Paulus
+#automation:
+  # - alias: Test Ping
+  #   initial_state: 'off'
+  #   trigger:
+  #     - platform: state
+  #   action:
+  #     service: notify.NOTIFIER_NAME
+  #     data:
+  #       title: '*Send a message*'
+  #       message: 'That's an example that _sends_ a *formatted* message with a custom inline keyboard.'
+  #       data:
+  #         inline_keyboard:
+  #           - 'Task 1:/command1, Task 2:/command2'
+  #           - 'Task 3:/command3, Task 4:/command4'
