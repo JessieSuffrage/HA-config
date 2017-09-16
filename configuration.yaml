@@ -65,4 +65,4 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 
 camera:
-  - platfom:demo
+  - platform:demo
