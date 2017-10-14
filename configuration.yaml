@@ -9,9 +9,6 @@ homeassistant:
   # Customization file
   customize: !include customize.yaml
 
-# Show links to resources in log and frontend
-introduction:
-
 # Enables the frontend
 frontend:
 
@@ -52,22 +49,21 @@ sun:
 sensor:
   - platform: yr
 
-# Text to speech
-tts:
-  - platform: google
+
+telegram_bot:
+  platform: polling
+  api_key: !secret telegram_key
+  allowed_chat_ids:
+    - !secret telegram_chatID_MK
+
+notify:
+  - name: telegram
+    platform: telegram
+    api_key: !secret telegram_key
+    chat_id: !secret telegram_chatID_MK
+
+
 
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
-
-#
-# telegram_bot:
-#   - platform: polling
-#     api_key: !secrets Telegram_API_key
-#     allowed_chat_ids:
-#       - !secrets Telegram_allowed_chat_id
-#
-# notify:
-#   - name: NOTIFIER_NAME
-#     platform: telegram
-#     chat_id: !secrets Telegram_allowed_chat_id

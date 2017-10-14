@@ -1,1 +1,73 @@
-[]
+- alias: 'Motion Detected'
+  trigger:
+    platform: event
+    event_type: custom
+    event_data:
+      state: 'off'
+  condition:
+  action:
+    - service: notify.telegram
+      data:
+        title: 'Motion Detection'
+        message: 'Hey, I noticed some motion in the house. Would you like me to:'
+        data:
+          inline_keyboard:
+            - 'Send a GIF:/command1, Ignore:/command2'
+            - 'Sound Alarm:/command3'
+
+
+- alias: 'Telegram bot that reply pong to ping'
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/ping'
+  action:
+    - service: notify.telegram
+      data:
+        title: 'Motion Detection'
+        message: 'Hey, I noticed some motion in the house. Would you like me to:'
+        data:
+          inline_keyboard:
+            - 'Send a GIF:/command1, Ignore:/command2'
+            - 'Sound Alarm:/command3'
+
+
+- alias: 'Sound Alarm'
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: '/command3'
+  action:
+    - service: telegram_bot.answer_callback_query
+      data_template:
+        callback_query_id: '{{ trigger.event.data.id }}'
+        message: 'Too Woo Too Woo Too Woo Too Woo'
+        show_alert: false
+    - service: notify.telegram
+      data:
+        message: 'Too Woo Too Woo Too Woo Too Woo'
+
+- alias: 'Send GIF of footage'
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: '/command2'
+  action:
+    - service: telegram_bot.answer_callback_query
+      data_template:
+        callback_query_id: '{{ trigger.event.data.id }}'
+        message: 'Here is your GIF'
+        show_alert: false
+    - service: notify.telegram
+      data:
+        message: 'Too Woo Too Woo Too Woo Too Woo'
+        data:
+          document:
+            file: 'http://www.reactiongifs.com/wp-content/uploads/2012/11/happy_grannies.gif'
+            caption: 'Document Title xy'
